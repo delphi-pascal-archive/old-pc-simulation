@@ -1,0 +1,10 @@
+010 ? "* Test INPUT"
+020 INPUT "* Quel est ton nom? " NOM$
+030 PRINT "‡* Bonjour " NOM$
+040 INPUT "‡* Quel est ton age? " AGE
+050 IF AGE > 59 THEN 080
+060 ? "‡* Encore JEUNE, hein?"
+070 GOTO 090
+080 ? "‡* Ben mon VIEUX!!!"
+090 ? " "
+100 END

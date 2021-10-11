@@ -1,0 +1,120 @@
+005 REM DEBUT
+008 GOSUB 600
+010 ? TAB(9) "áLA DERNIERE ALLUMETTE"
+015 RST = 21
+020 CHX = 1
+030 MAX = 1
+100 GOSUB 900
+110 GOSUB 990
+115 ? " Voulez-vous commencer? (O/N):";
+120 GET R$
+125 ? R$
+130 IF R$ = "N" GOTO 300
+140 GOSUB 990
+145 ? SPC(38)
+150 GOSUB 990
+155 ? "  * Prise maxi:" MAX
+160 ? "á  * Combien prenez-vous? ";
+165 GET CHX
+170 ? CHX
+175 IF CHX <= MAX GOTO 190
+180 ? "áá       *** TRICHEUR !!!!!"
+185 END
+190 RST = RST-CHX
+195 EF = 21-RST
+200 GOSUB 940
+205 IF RST > 1 GOTO 250
+210 GOSUB 990
+215 GOSUB 960
+218 GOSUB 990
+220 ? "á * Bravo! vous avez gagne"
+225 GOTO 590
+250 MAX = CHX*2
+300 REM Jeu Ordi ---------------------
+310 GOSUB 990
+315 ? " * A mon tour de jouer..."
+320 CHX = MAX
+325 CG = RST-1
+330 IF CHX >= CG THEN CHX = CG
+332 IF CHX = CG GOTO 370
+335 OK = 0
+340 NT = CHX*2
+342 CX = CG-NT
+345 IF NT < CX THEN OK = 1
+350 IF OK = 1 GOTO 370
+355 CHX = CHX-1
+360 IF CHX = CG THEN OK = 1
+365 IF OK = 0 GOTO 340
+370 IF CHX = 0 THEN CHX = 1
+372 ? "á * J'en prends " CHX SPC(15)
+375 WAIT 20
+380 RST = RST-CHX
+385 EF = 21-RST
+390 GOSUB 940
+395 IF RST > 1 GOTO 420
+400 ? "á * ...et je gagne!"
+410 GOTO 890
+420 MAX = CHX*2
+425 GOSUB 990
+430 GOSUB 960
+435 GOTO 150
+590 END
+600 REM INTRO -----------------
+610 ? TAB(9) "áLA DERNIERE ALLUMETTE"
+620 ? "áLe jeu se joue avec 21";
+621 ? " allumettes."
+622 ? "Le premier joueur prend obliga";
+623 ? "toirement"
+624 ? "1 seule allumette."
+625 ? "Le deuxieme joueur peut en pre";
+626 ? "lever une"
+627 ? "ou deux."
+628 ? "Puis,a tour de role,chaque jou";
+629 ? "eur peut"
+630 ? "prendre entre une et le double";
+631 ? " de la"
+632 ? "prise du joueur precedent."
+633 ? "Le joueur qui ramasse la derni";
+634 ? "ere a"
+635 ? "perdu."
+640 ? "ááÜÜÜÜOn commence ? ";
+642 GET R$
+645 CLS
+650 GOTO 010
+890 END
+900 REM Affiche allumette ------------
+901 AL$ = "åìììì"
+902 AM$ = "çÿÿÿÿ"
+904 T = 9
+905 FOR A1 = 1 TO 11
+910 ? "Êáááá"
+920 FOR A2 = 1 TO 5
+925 ? TAB(T) MID$(AL$,A2,1)
+926 IF A1 = 11 GOTO 930
+927 T1 = T+1
+928 ? "Ö" TAB(T1) MID$(AM$,A2,1)
+930 NEXT A2
+932 T = T+2
+935 NEXT A1
+936 RETURN 
+940 REM Efface allumette -------------
+942 T = 9
+944 FOR A1 = 1 TO EF
+946 ? "Êáááá"
+948 FOR A2 = 1 TO 5
+950 ? TAB(T) " "
+952 NEXT A2
+954 T = T+1
+956 NEXT A1
+958 RETURN 
+960 REM Efface lignes --------------
+965 FOR N = 1 TO 10
+970 ? SPC(38)
+975 NEXT N
+980 RETURN
+990 REM Pose ligne -----------------
+991 ? "Ê"
+992 FOR N = 1 TO 12
+993 ? " "
+994 NEXT N
+995 RETURN
